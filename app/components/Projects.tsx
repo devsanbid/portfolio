@@ -82,10 +82,10 @@ export default function Projects() {
         <div className="py-20 text-center text-gray-500">Failed to load projects</div>
       )}
 
-      {/* Repository cards */}
+      {/* Repository cards — show top 4 only */}
       {!loading && !error && (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {repos.map((repo, i) => (
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          {repos.slice(0, 4).map((repo, i) => (
             <motion.div
               key={repo.id}
               initial={{ opacity: 0, y: 30 }}
@@ -99,24 +99,24 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 className="block h-full"
               >
-                <GlassCard className="flex h-full flex-col justify-between">
-                  <div>
+                <GlassCard className="flex h-full flex-col justify-between overflow-hidden">
+                  <div className="min-w-0">
                     {/* Repo name */}
                     <div className="mb-3 flex items-start justify-between gap-2">
-                      <h3 className="text-lg font-semibold text-white line-clamp-1">
+                      <h3 className="min-w-0 truncate text-base font-semibold text-white sm:text-lg">
                         {repo.name}
                       </h3>
-                      <ExternalLink size={16} className="mt-1 shrink-0 text-gray-500" />
+                      <ExternalLink size={16} className="mt-0.5 shrink-0 text-gray-500" />
                     </div>
 
                     {/* Description */}
-                    <p className="mb-4 text-sm leading-relaxed text-gray-400 line-clamp-2">
+                    <p className="mb-4 text-xs leading-relaxed text-gray-400 line-clamp-2 sm:text-sm">
                       {repo.description || "No description provided"}
                     </p>
                   </div>
 
                   {/* Meta info */}
-                  <div className="flex items-center gap-4 text-xs text-gray-500">
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 sm:gap-4">
                     {/* Language */}
                     {repo.language && (
                       <div className="flex items-center gap-1.5">
@@ -155,20 +155,20 @@ export default function Projects() {
       )}
 
       {/* View all link */}
-      {!loading && !error && (
+      {!loading && !error && repos.length > 4 && (
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-12 text-center"
+          className="mt-10 text-center sm:mt-12"
         >
           <a
-            href={`https://github.com/${githubUsername}`}
+            href={`https://github.com/${githubUsername}?tab=repositories`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-gray-300 backdrop-blur-sm transition-all hover:border-purple-500/50 hover:bg-white/10 hover:text-white"
           >
-            View on GitHub
+            View all {repos.length} repos on GitHub
             <ExternalLink size={14} />
           </a>
         </motion.div>
