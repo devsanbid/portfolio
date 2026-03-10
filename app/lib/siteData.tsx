@@ -165,7 +165,7 @@ export const defaultSiteData: SiteData = {
       },
       {
         name: "VoteNP",
-        url: "https://votenp.sanbid.app",
+        url: "https://votenepal.sanbid.dev",
         description: "Voting of Nepal Current Election 2083 — real-time election data and results.",
         tags: ["React", "Election", "Nepal"],
       },
