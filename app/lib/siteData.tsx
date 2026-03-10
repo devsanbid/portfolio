@@ -28,6 +28,14 @@ export interface SocialLink {
   label: string;
 }
 
+// ── Website / live project ──
+export interface WebsiteItem {
+  name: string;
+  url: string;
+  description: string;
+  tags: string[];
+}
+
 // ── Full site data shape ──
 export interface SiteData {
   hero: {
@@ -54,6 +62,11 @@ export interface SiteData {
     frontend: SkillItem[];
     learning: SkillItem[];
     tools: SkillItem[];
+  };
+  websites: {
+    title: string;
+    subtitle: string;
+    items: WebsiteItem[];
   };
   projects: {
     title: string;
@@ -136,6 +149,30 @@ export const defaultSiteData: SiteData = {
       { name: "Git", level: 95, color: "from-orange-500 to-red-500" },
       { name: "Neovim", level: 88, color: "from-green-400 to-emerald-400" },
       { name: "Docker", level: 60, color: "from-blue-400 to-cyan-400" },
+    ],
+  },
+  websites: {
+    title: "Live Websites",
+    subtitle: "Projects in Production",
+    items: [
+      {
+        name: "Nepal Premium League",
+        url: "https://npl.sanbid.dev",
+        description: "Nepal Premium League Cricket — live scores, teams, and match updates.",
+        tags: ["Next.js", "Cricket", "Sports"],
+      },
+      {
+        name: "VoteNP",
+        url: "https://votenp.sanbid.app",
+        description: "Voting of Nepal Current Election 2083 — real-time election data and results.",
+        tags: ["React", "Election", "Nepal"],
+      },
+      {
+        name: "Instagram Chat AI",
+        url: "https://instagram.sanbid.dev",
+        description: "Instagram Chat AI Girlfriend — AI-powered conversational experience.",
+        tags: ["AI", "Chat", "Full-Stack"],
+      },
     ],
   },
   projects: {
