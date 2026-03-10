@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sandesh Shahi — Personal Portfolio
+
+A modern, visually impressive developer portfolio built with **Next.js 16**, **TailwindCSS 4**, and **Framer Motion**.
+
+## Features
+
+- **Glassmorphism UI** — Translucent cards, soft blurs, and subtle glass effects
+- **Smooth Animations** — Scroll reveals, hover effects, and floating elements via Framer Motion
+- **Dark Modern Theme** — Purple/blue gradient palette with neon glow accents
+- **GitHub Integration** — Dynamically fetches and displays repositories from the GitHub API
+- **i18n Language Switching** — English and Nepali with a navbar toggle
+- **Responsive Design** — Optimized for mobile, tablet, and desktop
+- **Animated Cursor Glow** — Soft glowing effect following the mouse
+- **Scroll Progress Bar** — Fixed top indicator showing page scroll position
+- **SEO Optimized** — Meta tags, Open Graph, and semantic HTML
+- **Accessible** — Keyboard navigable, proper ARIA labels
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Next.js 16 (App Router) | Framework |
+| TailwindCSS 4 | Styling |
+| Framer Motion | Animations |
+| Lucide React | Icons |
+| TypeScript | Type safety |
+
+## Sections
+
+1. **Hero** — Animated gradient intro with glass cards
+2. **About** — Journey cards explaining background
+3. **Skills** — Animated progress bars for frontend & learning skills
+4. **Projects** — Live GitHub repo cards fetched from API
+5. **Experience** — Animated vertical timeline
+6. **Contact** — Glassmorphism form with social links
+7. **Footer** — Minimal modern footer
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# Install dependencies
+bun install
+
+# Run development server
 bun dev
+
+# Build for production
+bun run build
+
+# Start production server
+bun start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+├── components/        # All React components
+│   ├── Navbar.tsx     # Navigation with language switcher
+│   ├── Hero.tsx       # Hero/landing section
+│   ├── About.tsx      # About me section
+│   ├── Skills.tsx     # Skills with progress bars
+│   ├── Projects.tsx   # GitHub repos display
+│   ├── Experience.tsx # Timeline section
+│   ├── Contact.tsx    # Contact form & social links
+│   ├── Footer.tsx     # Footer
+│   ├── GlassCard.tsx  # Reusable glass card
+│   ├── SectionWrapper.tsx   # Section with scroll reveal
+│   ├── ScrollProgress.tsx   # Top scroll bar
+│   ├── CursorGlow.tsx       # Mouse glow effect
+│   └── FloatingShapes.tsx   # Background orbs
+├── lib/
+│   ├── i18n.tsx       # i18n context provider
+│   └── github.ts      # GitHub API utility
+├── globals.css        # Global styles
+├── layout.tsx         # Root layout with fonts & metadata
+└── page.tsx           # Main page (assembles all sections)
+locales/
+├── en.json            # English translations
+└── ne.json            # Nepali translations
+```
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT — Sandesh Shahi
