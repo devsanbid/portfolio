@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Sandesh Shahi" }],
   openGraph: {
     title: "Sandesh Shahi — Web Developer",
-    description: "Modern portfolio showcasing web development projects and skills.",
+    description: "sanbid.dev — Portfolio of Sandesh Shahi, a passionate web developer.",
     type: "website",
   },
 };
