@@ -21,6 +21,7 @@ import {
   ChevronRight,
   Home,
   Eye,
+  Globe,
 } from "lucide-react";
 import {
   SiteDataProvider,
@@ -29,6 +30,7 @@ import {
   type SkillItem,
   type TimelineEntry,
   type SocialLink,
+  type WebsiteItem,
   defaultSiteData,
 } from "@/app/lib/siteData";
 
@@ -45,6 +47,7 @@ const sections = [
   { id: "hero", label: "Hero Section", icon: Home },
   { id: "about", label: "About", icon: User },
   { id: "skills", label: "Skills", icon: Code2 },
+  { id: "websites", label: "Websites", icon: Globe },
   { id: "projects", label: "Projects", icon: FolderGit2 },
   { id: "experience", label: "Experience", icon: Briefcase },
   { id: "contact", label: "Contact", icon: MessageSquare },
@@ -664,6 +667,91 @@ function Dashboard() {
     </div>
   );
 
+  // ── Websites helpers ──
+  const updateWebsitesMeta = (key: "title" | "subtitle", value: string) =>
+    setDraft((d) => ({ ...d, websites: { ...d.websites, [key]: value } }));
+
+  const updateWebsite = (index: number, key: keyof WebsiteItem, value: string | string[]) =>
+    setDraft((d) => {
+      const items = [...d.websites.items];
+      items[index] = { ...items[index], [key]: value };
+      return { ...d, websites: { ...d.websites, items } };
+    });
+
+  const addWebsite = () =>
+    setDraft((d) => ({
+      ...d,
+      websites: {
+        ...d.websites,
+        items: [
+          ...d.websites.items,
+          { name: "New Website", url: "https://", description: "", tags: [] },
+        ],
+      },
+    }));
+
+  const removeWebsite = (index: number) =>
+    setDraft((d) => ({
+      ...d,
+      websites: {
+        ...d.websites,
+        items: d.websites.items.filter((_, i) => i !== index),
+      },
+    }));
+
+  const renderWebsites = () => (
+    <div className="space-y-6">
+      <SectionCard title="Websites Section">
+        <AdminInput
+          label="Title"
+          value={draft.websites.title}
+          onChange={(v) => updateWebsitesMeta("title", v)}
+        />
+        <AdminInput
+          label="Subtitle"
+          value={draft.websites.subtitle}
+          onChange={(v) => updateWebsitesMeta("subtitle", v)}
+        />
+      </SectionCard>
+
+      <SectionCard title="Website Items">
+        {draft.websites.items.map((site, i) => (
+          <div key={i} className="space-y-3 rounded-lg border border-white/5 bg-white/[0.02] p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-purple-300">
+                Website #{i + 1}
+              </span>
+              {draft.websites.items.length > 1 && (
+                <button onClick={() => removeWebsite(i)} className="text-red-400 hover:text-red-300">
+                  <Trash2 size={14} />
+                </button>
+              )}
+            </div>
+            <AdminInput label="Name" value={site.name} onChange={(v) => updateWebsite(i, "name", v)} />
+            <AdminInput label="URL" value={site.url} onChange={(v) => updateWebsite(i, "url", v)} />
+            <AdminInput
+              label="Description"
+              value={site.description}
+              onChange={(v) => updateWebsite(i, "description", v)}
+              rows={2}
+            />
+            <AdminInput
+              label="Tags (comma separated)"
+              value={site.tags.join(", ")}
+              onChange={(v) => updateWebsite(i, "tags", v.split(",").map((t) => t.trim()).filter(Boolean))}
+            />
+          </div>
+        ))}
+        <button
+          onClick={addWebsite}
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-white/10 py-3 text-xs text-gray-400 transition-colors hover:border-purple-500/30 hover:text-purple-300"
+        >
+          <Plus size={14} /> Add Website
+        </button>
+      </SectionCard>
+    </div>
+  );
+
   const renderSocial = () => (
     <div className="space-y-6">
       <SectionCard title="Social Links">
@@ -731,6 +819,7 @@ function Dashboard() {
     hero: renderHero,
     about: renderAbout,
     skills: renderSkills,
+    websites: renderWebsites,
     projects: renderProjects,
     experience: renderExperience,
     contact: renderContact,
