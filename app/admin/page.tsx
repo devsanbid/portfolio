@@ -444,6 +444,22 @@ function Dashboard() {
 
   const renderHero = () => (
     <div className="space-y-6">
+      <SectionCard title="Avatar">
+        <AdminInput
+          label="Avatar Image URL"
+          value={draft.hero.avatar}
+          onChange={(v) => updateHero("avatar", v)}
+          placeholder="https://example.com/avatar.png"
+        />
+        {draft.hero.avatar && (
+          <div className="mt-3 flex items-center gap-4">
+            <div className="h-16 w-16 overflow-hidden rounded-full border border-white/10 bg-white/5">
+              <img src={draft.hero.avatar} alt="Preview" className="h-full w-full rounded-full object-cover" />
+            </div>
+            <span className="text-xs text-gray-500">Preview</span>
+          </div>
+        )}
+      </SectionCard>
       <SectionCard title="Hero Text">
         <AdminInput label="Badge Text" value={draft.hero.badge} onChange={(v) => updateHero("badge", v)} />
         <AdminInput label="Greeting" value={draft.hero.greeting} onChange={(v) => updateHero("greeting", v)} />
