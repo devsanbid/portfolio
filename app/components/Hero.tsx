@@ -69,6 +69,28 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
+        {/* Avatar */}
+        {hero.avatar && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1, duration: 0.7, type: "spring", stiffness: 150 }}
+            className="mb-6 flex justify-center"
+          >
+            <div className="relative">
+              <div className="h-28 w-28 overflow-hidden rounded-full border-2 border-purple-500/30 bg-white/5 p-1 shadow-lg shadow-purple-500/20 backdrop-blur-sm sm:h-36 sm:w-36">
+                <img
+                  src={hero.avatar}
+                  alt={hero.name}
+                  className="h-full w-full rounded-full object-cover"
+                />
+              </div>
+              {/* Glow ring */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 blur-xl" />
+            </div>
+          </motion.div>
+        )}
+
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
