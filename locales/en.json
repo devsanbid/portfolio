@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Sandesh Shahi",
+    "role": "Web Developer | Future Data Scientist",
+    "description": "I build modern web experiences with React, Next.js, and cutting-edge technologies. Currently exploring the world of Data Science.",
+    "cta": "View My Work",
+    "resumeCta": "Get In Touch"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "My Journey",
+    "description": "I am a developer focused on web development with strong experience in React, Next.js, and Vanilla JavaScript. Currently studying at Softwarica College (affiliated with Coventry University), I am expanding my knowledge into data science and working towards becoming a Data Scientist.",
+    "cards": {
+      "webDev": {
+        "title": "Web Developer",
+        "description": "Building modern, responsive, and performant web applications using React, Next.js, and cutting-edge frontend technologies."
+      },
+      "dataScience": {
+        "title": "Aspiring Data Scientist",
+        "description": "Currently learning data analysis, Python, and machine learning fundamentals to transition into the data science field."
+      },
+      "passion": {
+        "title": "Passionate Builder",
+        "description": "Driven by the desire to create elegant solutions that combine beautiful design with powerful functionality."
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills & Technologies",
+    "subtitle": "What I Work With",
+    "frontend": "Frontend",
+    "learning": "Currently Learning"
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "GitHub Repositories",
+    "stars": "Stars",
+    "viewOnGithub": "View on GitHub",
+    "loading": "Loading projects...",
+    "error": "Failed to load projects"
+  },
+  "experience": {
+    "title": "My Journey",
+    "subtitle": "Experience & Learning",
+    "timeline": [
+      {
+        "year": "2026",
+        "title": "Learning Data Science",
+        "description": "Exploring data analysis, Python, and machine learning fundamentals. Building a strong foundation in data science."
+      },
+      {
+        "year": "2025",
+        "title": "Advanced Web Development",
+        "description": "Mastering React, Next.js, and modern frontend frameworks. Building production-ready web applications."
+      },
+      {
+        "year": "2024",
+        "title": "Web Development Journey",
+        "description": "Started learning HTML, CSS, JavaScript, and React. Built foundational projects and discovered passion for web development."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's Work Together",
+    "description": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 Sandesh Shahi. All rights reserved.",
+    "madeWith": "Made with passion and code"
+  }
+}
