@@ -16,6 +16,8 @@ import {
   SiLinux,
   SiNeovim,
   SiDocker,
+  SiRust,
+  SiLua,
 } from "react-icons/si";
 
 // Tech icons displayed below CTA with brand colors
@@ -215,15 +217,19 @@ export default function Hero() {
         </motion.div>
 
         {/* Floating glass cards (decorative) */}
-        <div className="pointer-events-none mt-16 hidden items-center justify-center gap-6 md:flex">
+        <div className="pointer-events-none mt-16 hidden items-center justify-center gap-5 md:flex">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
             <GlassCard hover={false} className="!p-4 text-left">
-              <div className="mb-1 text-xs text-gray-500">React / Next.js</div>
-              <div className="h-2 w-32 rounded-full bg-gradient-to-r from-purple-500 to-blue-500" />
+              <div className="mb-2 flex items-center gap-2">
+                <SiReact className="text-base" style={{ color: "#61DAFB" }} />
+                <SiNextdotjs className="text-base" style={{ color: "#ffffff" }} />
+                <span className="text-xs text-gray-400">React / Next.js</span>
+              </div>
+              <div className="h-2 w-32 rounded-full bg-gradient-to-r from-[#61DAFB] to-[#0070F3]" />
             </GlassCard>
           </motion.div>
           <motion.div
@@ -232,8 +238,24 @@ export default function Hero() {
             transition={{ delay: 1.4, duration: 0.8 }}
           >
             <GlassCard hover={false} className="!p-4 text-left">
-              <div className="mb-1 text-xs text-gray-500">Data Science</div>
-              <div className="h-2 w-24 rounded-full bg-gradient-to-r from-cyan-500 to-green-500" />
+              <div className="mb-2 flex items-center gap-2">
+                <SiPython className="text-base" style={{ color: "#3776AB" }} />
+                <span className="text-xs text-gray-400">Data Science</span>
+              </div>
+              <div className="h-2 w-24 rounded-full bg-gradient-to-r from-[#3776AB] to-[#10B981]" />
+            </GlassCard>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+          >
+            <GlassCard hover={false} className="!p-4 text-left">
+              <div className="mb-2 flex items-center gap-2">
+                <SiRust className="text-base" style={{ color: "#DEA584" }} />
+                <span className="text-xs text-gray-400">Rust</span>
+              </div>
+              <div className="h-2 w-28 rounded-full bg-gradient-to-r from-[#DEA584] to-[#B7410E]" />
             </GlassCard>
           </motion.div>
           <motion.div
@@ -242,8 +264,11 @@ export default function Hero() {
             transition={{ delay: 1.6, duration: 0.8 }}
           >
             <GlassCard hover={false} className="!p-4 text-left">
-              <div className="mb-1 text-xs text-gray-500">JavaScript</div>
-              <div className="h-2 w-28 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500" />
+              <div className="mb-2 flex items-center gap-2">
+                <SiLua className="text-base" style={{ color: "#2C2D72" }} />
+                <span className="text-xs text-gray-400">Lua</span>
+              </div>
+              <div className="h-2 w-24 rounded-full bg-gradient-to-r from-[#2C2D72] to-[#00007C]" />
             </GlassCard>
           </motion.div>
         </div>
