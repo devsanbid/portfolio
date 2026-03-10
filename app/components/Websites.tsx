@@ -1,18 +1,28 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Globe } from "lucide-react";
 import { useSiteData } from "@/app/lib/siteData";
 import SectionWrapper from "./SectionWrapper";
 import GlassCard from "./GlassCard";
 
 /**
  * Websites — Showcase of live production websites / apps.
- * Uses scaled-down iframes as live mini-previews.
+ * Desktop: scaled-down iframes. Mobile: lightweight placeholder (no iframes).
  */
 export default function Websites() {
   const { data } = useSiteData();
   const { title, subtitle, items } = data.websites;
+  const [isMobile, setIsMobile] = useState(true); // default true to avoid iframe flash
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   if (!items || items.length === 0) return null;
 
@@ -51,7 +61,7 @@ export default function Websites() {
               className="group block h-full"
             >
               <GlassCard className="flex h-full flex-col overflow-hidden p-0 transition-all duration-300 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10">
-                {/* ── Live iframe preview ── */}
+                {/* ── Preview area ── */}
                 <div className="relative h-44 w-full overflow-hidden border-b border-white/5 bg-[#0a0a1a] sm:h-48">
                   {/* Browser dots */}
                   <div className="absolute left-3 top-2.5 z-10 flex gap-1.5">
@@ -65,23 +75,34 @@ export default function Websites() {
                       {site.url.replace(/^https?:\/\//, "")}
                     </span>
                   </div>
-                  {/* Scaled iframe */}
-                  <div className="absolute inset-0 top-8 origin-top-left scale-[0.25] sm:scale-[0.28]" style={{ width: "400%", height: "400%" }}>
-                    <iframe
-                      src={site.url}
-                      title={site.name}
-                      className="h-full w-full border-0"
-                      loading="lazy"
-                      sandbox="allow-scripts allow-same-origin"
-                      tabIndex={-1}
-                    />
-                  </div>
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 z-[5] flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/40">
-                    <span className="flex items-center gap-2 rounded-full bg-purple-600/90 px-4 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100">
-                      <ExternalLink size={13} /> Visit Site
-                    </span>
-                  </div>
+
+                  {/* Desktop: live iframe | Mobile: lightweight placeholder */}
+                  {isMobile ? (
+                    <div className="absolute inset-0 top-8 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-purple-950/40 to-blue-950/40">
+                      <Globe size={28} className="text-purple-400/60" />
+                      <span className="text-xs font-medium text-gray-400">Tap to visit</span>
+                    </div>
+                  ) : (
+                    <div className="absolute inset-0 top-8 origin-top-left scale-[0.25] sm:scale-[0.28]" style={{ width: "400%", height: "400%" }}>
+                      <iframe
+                        src={site.url}
+                        title={site.name}
+                        className="h-full w-full border-0"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                        tabIndex={-1}
+                      />
+                    </div>
+                  )}
+
+                  {/* Hover overlay — desktop only */}
+                  {!isMobile && (
+                    <div className="absolute inset-0 z-[5] flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/40">
+                      <span className="flex items-center gap-2 rounded-full bg-purple-600/90 px-4 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100">
+                        <ExternalLink size={13} /> Visit Site
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* ── Card body ── */}

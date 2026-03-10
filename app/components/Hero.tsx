@@ -54,19 +54,22 @@ export default function Hero() {
       {/* Animated gradient orbs behind content */}
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute left-1/2 top-1/4 h-[250px] w-[250px] -translate-x-1/2 rounded-full bg-purple-600/20 blur-[120px] sm:h-[500px] sm:w-[500px]"
+          className="absolute left-1/2 top-1/4 h-[250px] w-[250px] -translate-x-1/2 rounded-full bg-purple-600/20 blur-[60px] sm:blur-[120px] sm:h-[500px] sm:w-[500px]"
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: "transform, opacity" }}
         />
         <motion.div
-          className="absolute left-1/3 top-1/2 h-[200px] w-[200px] rounded-full bg-blue-600/15 blur-[100px] sm:h-[400px] sm:w-[400px]"
+          className="absolute left-1/3 top-1/2 h-[200px] w-[200px] rounded-full bg-blue-600/15 blur-[50px] sm:blur-[100px] sm:h-[400px] sm:w-[400px]"
           animate={{ scale: [1.1, 0.9, 1.1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: "transform, opacity" }}
         />
         <motion.div
           className="hidden rounded-full bg-cyan-500/10 blur-[100px] sm:absolute sm:right-1/4 sm:top-1/3 sm:block sm:h-[350px] sm:w-[350px]"
           animate={{ scale: [0.9, 1.15, 0.9], opacity: [0.2, 0.35, 0.2] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: "transform, opacity" }}
         />
       </div>
 
@@ -80,15 +83,15 @@ export default function Hero() {
             className="mb-6 flex justify-center"
           >
             <div className="relative">
-              <div className="h-28 w-28 overflow-hidden rounded-full border-2 border-purple-500/30 bg-white/5 p-1 shadow-lg shadow-purple-500/20 backdrop-blur-sm sm:h-36 sm:w-36">
+              <div className="h-28 w-28 overflow-hidden rounded-full border-2 border-purple-500/30 bg-white/5 p-1 shadow-lg shadow-purple-500/20 sm:h-36 sm:w-36">
                 <img
                   src={hero.avatar}
                   alt={hero.name}
                   className="h-full w-full rounded-full object-cover"
                 />
               </div>
-              {/* Glow ring */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 blur-xl" />
+              {/* Glow ring — desktop only */}
+              <div className="absolute inset-0 hidden rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 blur-xl md:block" />
             </div>
           </motion.div>
         )}
