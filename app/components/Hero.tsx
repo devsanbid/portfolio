@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { useSiteData } from "@/app/lib/siteData";
 import GlassCard from "./GlassCard";
+import TypeWriter from "./TypeWriter";
 import {
   SiReact,
   SiNextdotjs,
@@ -101,14 +102,19 @@ export default function Hero() {
           </span>
         </motion.h1>
 
-        {/* Role */}
+        {/* Role — Typing animation */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
           className="mb-6 text-lg font-medium text-purple-300 sm:text-xl md:text-2xl"
         >
-          {hero.role}
+          <TypeWriter
+            words={hero.role.includes("|") ? hero.role.split("|").map(s => s.trim()) : [hero.role]}
+            typingSpeed={70}
+            deletingSpeed={40}
+            pauseDuration={2500}
+          />
         </motion.p>
 
         {/* Description */}
