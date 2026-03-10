@@ -53,16 +53,57 @@ export default function About() {
         </motion.h2>
       </div>
 
-      {/* Description */}
+      {/* Description — highlight college name */}
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.2 }}
-        className="mx-auto mb-10 max-w-3xl text-center text-base leading-relaxed text-gray-400 sm:mb-16 sm:text-lg"
+        className="mx-auto mb-6 max-w-3xl text-center text-base leading-relaxed text-gray-400 sm:mb-8 sm:text-lg"
       >
-        {about.description}
+        {(() => {
+          const keyword = "Softwarica College (affiliated with Coventry University)";
+          const idx = about.description.indexOf(keyword);
+          if (idx === -1) return about.description;
+          const before = about.description.slice(0, idx);
+          const after = about.description.slice(idx + keyword.length);
+          return (
+            <>
+              {before}
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text font-semibold text-transparent">
+                {keyword}
+              </span>
+              {after}
+            </>
+          );
+        })()}
       </motion.p>
+
+      {/* Education badge */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.35 }}
+        className="mx-auto mb-10 flex max-w-md items-center justify-center sm:mb-16"
+      >
+        <a
+          href="https://softwarica.edu.np"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-md transition-all hover:border-purple-500/30 hover:bg-white/10 sm:gap-4 sm:px-6 sm:py-3.5"
+        >
+          <img
+            src="/softwarica-logo.svg"
+            alt="Softwarica College"
+            className="h-8 w-auto brightness-90 transition-all group-hover:brightness-110 sm:h-10"
+          />
+          <div className="border-l border-white/10 pl-3 sm:pl-4">
+            <span className="block text-xs font-semibold text-white sm:text-sm">Softwarica College</span>
+            <span className="block text-[10px] text-gray-500 sm:text-xs">Affiliated with Coventry University, UK</span>
+          </div>
+        </a>
+      </motion.div>
 
       {/* Info Cards — dynamically from admin */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
