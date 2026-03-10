@@ -39,6 +39,7 @@ export interface WebsiteItem {
 // ── Full site data shape ──
 export interface SiteData {
   hero: {
+    avatar: string;
     badge: string;
     greeting: string;
     name: string;
@@ -93,6 +94,7 @@ export interface SiteData {
 // ── Default values ──
 export const defaultSiteData: SiteData = {
   hero: {
+    avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Nolan&glasses=variant01&glassesProbability=100",
     badge: "Available for new projects",
     greeting: "Hello, I'm",
     name: "Sandesh Shahi",
