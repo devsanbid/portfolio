@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 742 214" fill="none">
+  <defs>
+    <linearGradient id="a" x1="150.97" y1="231.76" x2="2.03" y2="22.39" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#16b0ed" stop-opacity=".8"/>
+      <stop offset=".5" stop-color="#0f59b2" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#022f56"/>
+    </linearGradient>
+    <linearGradient id="b" x1="6" y1="113" x2="148" y2="113" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7db643"/>
+      <stop offset=".5" stop-color="#367533"/>
+      <stop offset="1" stop-color="#0e4028"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(0,0)">
+    <path d="M0 214 L0 0 L71.625 0 L152 107 L152 0 L195 0 L195 214 L123.375 214 L43 107 L43 214 Z" fill="url(#a)"/>
+    <path d="M0 0 L43 0 L43 214 L0 214 Z" fill="url(#b)"/>
+    <path d="M152 214 L152 107 L195 107 L195 214 Z" fill="#16b0ed" fill-opacity=".8"/>
+  </g>
+  <g fill="white" font-family="sans-serif" font-size="140" font-weight="700">
+    <text x="220" y="170">eovim</text>
+  </g>
+</svg>
