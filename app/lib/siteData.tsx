@@ -94,7 +94,7 @@ export interface SiteData {
 // ── Default values ──
 export const defaultSiteData: SiteData = {
   hero: {
-    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Sandesh&accessories=prescription02&accessoriesProbability=100&facialHairProbability=0&clothing=blazerAndShirt&top=shortFlat&eyes=default&eyebrows=defaultNatural&mouth=smile&skinColor=ffdbb4&hairColor=2c1b18&backgroundColor=transparent",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Sandesh&accessories=prescription02&accessoriesProbability=100&facialHairProbability=0&clothing=blazerAndShirt&clothesColor=65c9ff&top=shortFlat&eyes=default&eyebrows=defaultNatural&mouth=smile&skinColor=ffdbb4&hairColor=2c1b18&backgroundColor=transparent",
     badge: "Available for new projects",
     greeting: "Hello, I'm",
     name: "Sandesh Shahi",
