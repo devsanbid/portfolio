@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useSiteData, type SkillItem } from "@/app/lib/siteData";
@@ -96,16 +97,17 @@ function getTechIcon(name: string): { icon: IconType; color: string } | null {
   return techIconMap[name.toLowerCase()] ?? null;
 }
 
-function SkillCard({ skill, index }: { skill: SkillItem; index: number }) {
+function SkillCard({ skill, index, visible }: { skill: SkillItem; index: number; visible: boolean }) {
   const tech = getTechIcon(skill.name);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.08 }}
-      className="group rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all duration-300 hover:border-purple-500/30 hover:bg-white/10"
+    <div
+      className="group rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all duration-500 hover:border-purple-500/30 hover:bg-white/10"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+        transitionDelay: `${index * 60}ms`,
+      }}
     >
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
@@ -119,29 +121,57 @@ function SkillCard({ skill, index }: { skill: SkillItem; index: number }) {
         <span className="text-xs text-gray-500">{skill.level}%</span>
       </div>
 
-      {/* Progress bar */}
+      {/* Progress bar — pure CSS transition, no Framer Motion */}
       <div className="h-2 w-full overflow-hidden rounded-full bg-white/5">
-        <motion.div
-          className={`h-full rounded-full bg-gradient-to-r ${skill.color}`}
-          initial={{ width: 0 }}
-          whileInView={{ width: `${skill.level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: index * 0.08, ease: "easeOut" }}
+        <div
+          className={`h-full rounded-full bg-gradient-to-r ${skill.color} transition-[width] duration-[1s] ease-out`}
+          style={{
+            width: visible ? `${skill.level}%` : "0%",
+            transitionDelay: `${index * 60 + 200}ms`,
+          }}
         />
       </div>
 
       {/* Glow on hover */}
-      <motion.div
+      <div
         className={`mt-2 h-[2px] rounded-full bg-gradient-to-r ${skill.color} opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-60`}
         style={{ width: `${skill.level}%` }}
       />
-    </motion.div>
+    </div>
   );
+}
+
+/** Hook: observe a ref and flip `true` once it enters the viewport */
+function useInView(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          io.disconnect(); // once only
+        }
+      },
+      { threshold },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [threshold]);
+
+  return { ref, visible };
 }
 
 export default function Skills() {
   const { data } = useSiteData();
   const skills = data.skills;
+
+  const frontendObs = useInView(0.1);
+  const learningObs = useInView(0.1);
+  const toolsObs = useInView(0.1);
 
   return (
     <SectionWrapper id="skills">
@@ -167,7 +197,7 @@ export default function Skills() {
 
       {/* Frontend Skills */}
       {skills.frontend.length > 0 && (
-        <div className="mb-12">
+        <div className="mb-12" ref={frontendObs.ref}>
           <motion.h3
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -178,7 +208,7 @@ export default function Skills() {
           </motion.h3>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {skills.frontend.map((skill, i) => (
-              <SkillCard key={skill.name + i} skill={skill} index={i} />
+              <SkillCard key={skill.name + i} skill={skill} index={i} visible={frontendObs.visible} />
             ))}
           </div>
         </div>
@@ -186,7 +216,7 @@ export default function Skills() {
 
       {/* Learning Skills */}
       {skills.learning.length > 0 && (
-        <div className="mb-12">
+        <div className="mb-12" ref={learningObs.ref}>
           <motion.h3
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -197,7 +227,7 @@ export default function Skills() {
           </motion.h3>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {skills.learning.map((skill, i) => (
-              <SkillCard key={skill.name + i} skill={skill} index={i} />
+              <SkillCard key={skill.name + i} skill={skill} index={i} visible={learningObs.visible} />
             ))}
           </div>
         </div>
@@ -205,7 +235,7 @@ export default function Skills() {
 
       {/* Dev Tools & Environment */}
       {skills.tools && skills.tools.length > 0 && (
-        <div className="mb-16">
+        <div className="mb-16" ref={toolsObs.ref}>
           <motion.h3
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -216,7 +246,7 @@ export default function Skills() {
           </motion.h3>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {skills.tools.map((skill, i) => (
-              <SkillCard key={skill.name + i} skill={skill} index={i} />
+              <SkillCard key={skill.name + i} skill={skill} index={i} visible={toolsObs.visible} />
             ))}
           </div>
         </div>
